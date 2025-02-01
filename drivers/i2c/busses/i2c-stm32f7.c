@@ -2298,7 +2298,7 @@ static int stm32f7_i2c_probe(struct platform_device *pdev)
 		}
 	}
 
-	dev_info(i2c_dev->dev, "STM32F7 I2C-%d bus adapter\n", adap->nr);
+	dev_info(i2c_dev->dev, "STM32F7 I2C-%d bus adapter TEST\n", adap->nr);
 
 	pm_runtime_mark_last_busy(i2c_dev->dev);
 	pm_runtime_put_autosuspend(i2c_dev->dev);
