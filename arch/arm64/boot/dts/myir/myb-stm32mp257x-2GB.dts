@@ -26,5 +26,93 @@
 		device_type = "memory";
 		reg = <0x0 0x80000000 0x0 0x80000000>;
 	};
-
 };
+
+&pinctrl {
+	adc3_pins_mx: adc3_mx-0 {
+		pins {
+			pinmux = <STM32_PINMUX('G', 3, ANALOG)>; /* ADC3_INP3 */
+		};
+	};
+
+	adc3_sleep_pins_mx: adc3_sleep_mx-0 {
+		pins {
+			pinmux = <STM32_PINMUX('G', 3, ANALOG)>; /* ADC3_INP3 */
+		};
+	};
+
+	// adc_12_pins_mx: adc_12_mx-0 {
+		// pins {
+			// pinmux = <STM32_PINMUX('G', 4, ANALOG)>; /* ADC1_INP4 */
+		// };
+	// };
+
+	// adc_12_sleep_pins_mx: adc_12_sleep_mx-0 {
+		// pins {
+			// pinmux = <STM32_PINMUX('G', 4, ANALOG)>; /* ADC1_INP4 */
+		// };
+	// };
+
+	// /* USER CODE BEGIN pinctrl */
+	// /* USER CODE END pinctrl */
+};
+
+// &adc_12 {
+	// pinctrl-names = "default", "sleep";
+	// pinctrl-0 = <&adc_12_pins_mx>;
+	// pinctrl-1 = <&adc_12_sleep_pins_mx>;
+	// status = "okay";
+
+	// /* USER CODE BEGIN adc_12 */
+	// adc1: adc@0 {
+		// channel@4 {
+			// reg = <4>;
+			// st,min-sample-time-ns = <10000>;
+		// };
+		// /delete-node/ channel@3;
+		// /delete-node/ channel@14;
+	// /* USER CODE END adc_12 */
+	// };
+// };
+
+&timers20 {
+	status = "okay";
+	
+	/delete-property/dmas;
+	/delete-property/dma-names;
+
+	/* USER CODE BEGIN timers20 */
+	timer@19 {
+		status = "okay";
+	};
+	/* USER CODE END timers20 */
+};
+
+&adc_3 {
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&adc3_pins_mx>;
+	pinctrl-1 = <&adc3_sleep_pins_mx>;
+	status = "okay";
+	
+	vdda-supply = <&scmi_v1v8>;
+	vref-supply = <&scmi_v1v8>;
+
+	/* USER CODE BEGIN adc_3 */
+	adc3: adc@0 {
+		status = "okay";
+
+		channel@3 {
+			reg = <3>;
+			st,min-sample-time-ns = <10000>;
+		};
+		
+		/delete-node/ channel@14;
+		/delete-node/ channel@15;
+		/delete-node/ channel@17;
+		/delete-node/ channel@18;
+	};
+	
+
+	/* USER CODE END adc_3 */
+};
+
